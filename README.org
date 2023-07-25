@@ -1,0 +1,4 @@
+* Progetto Basi di dati
+Superato con 29.
+Errore nello schema logico, mancano le PK (PD).
+Relazione delega troppo pesante.

@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  postgres:
+    container_name: pg
+    restart: always
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: cantiere
+    ports:
+      - "5432:5432"
+  pgadmin:
+    container_name: pg_admin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: antonio.petrillo4@studenti.unina.it
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
