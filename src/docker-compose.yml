@@ -1,21 +1,27 @@
-version: "3.9"
+version: "3.2"
 services:
-  postgres:
-    container_name: pg
-    restart: always
-    image: postgres
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: cantiere
+  neo4j:
+    image: neo4j:latest
+    container_name: 'devneo4j'
+    volumes:
+      - './data:/data'
+      - './logs:/logs'
+      - './import:/var/lib/neo4j/import'
+      - './conf/:/conf/'
+      - './plugins/:/plugins/'
     ports:
-      - "5432:5432"
-  pgadmin:
-    container_name: pg_admin
-    image: dpage/pgadmin4
-    restart: always
+      - 7474:7474
+      - 7687:7687
+    restart: on-failure
     environment:
-      PGADMIN_DEFAULT_EMAIL: antonio.petrillo4@studenti.unina.it
-      PGADMIN_DEFAULT_PASSWORD: root
-    ports:
-      - "5050:80"
+      - NEO4J_AUTH=neo4j/password
+    networks:
+        - neo4j_go_net
+    command: neo4j
+
+networks:
+  neo4j_go_net:
+    driver: bridge
+
+volumes:
+  dgraph:
